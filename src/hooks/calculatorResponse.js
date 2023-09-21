@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 export const useExternalApi = () => {
+    const api = process.env.REACT_APP_BACKEND_URL
 
     const makeRequest = async (options) => {
 
@@ -22,7 +23,7 @@ export const useExternalApi = () => {
     const prediccion = async (datos, setResultPredict) => {
 
         const config = {
-            url: `http://127.0.0.1:8000/hacer-predicciones/`,
+            url: `${api}/hacer-predicciones/`,
             method: 'POST',
             headers: {},
             data: datos
@@ -36,7 +37,7 @@ export const useExternalApi = () => {
 
     const traerPacientes = async (setPacientes) => {
         const config = {
-            url: `http://127.0.0.1:8000/get-all-pacientes/`,
+            url: `${api}/get-all-pacientes/`,
             method: 'GET',
             headers: {},
             data: {}
@@ -56,7 +57,7 @@ export const useExternalApi = () => {
         console.log(datos)
         const cedula_medico = await traermedico(user)
         const config = {
-            url: `http://127.0.0.1:8000/create-diagnostico/`,
+            url: `${api}/create-diagnostico/`,
             method: 'POST',
             headers: {},
             data: {
@@ -73,7 +74,7 @@ export const useExternalApi = () => {
     const traermedico = async (user) => {
         console.log(user)
         const config = {
-            url: `http://127.0.0.1:8000/get-medico-byemail/`+ user.email,
+            url: `${api}/get-medico-byemail/`+ user.email,
             method: 'GET',
             headers: {},
             data: {}

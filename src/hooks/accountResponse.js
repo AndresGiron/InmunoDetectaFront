@@ -7,7 +7,6 @@ export const useExternalApi = () => {
     const {setUser} = useContext(UserContext);
     const navigate = useNavigate();
     const api = process.env.REACT_APP_BACKEND_URL
-    console.log(api)
 
     const makeRequest = async (options) => {
 
@@ -29,7 +28,7 @@ export const useExternalApi = () => {
     const logIn = async (correo, password,setUser,setShow,setError) => {
 
         const config = {
-            url: `http://127.0.0.1:8000/login/`,
+            url: `${api}/login/`,
             method: 'POST',
             headers: {},
             data: {
@@ -65,7 +64,7 @@ export const useExternalApi = () => {
         console.log(datos)
 
         const config = {
-            url: `http://127.0.0.1:8000/create-paciente/`,
+            url: `${api}/create-paciente/`,
             method: 'POST',
             headers: {},
             data: {
@@ -102,7 +101,7 @@ export const useExternalApi = () => {
         console.log(datos)
 
         const config = {
-            url: `http://127.0.0.1:8000/create-medico/`,
+            url: `${api}/create-medico/`,
             method: 'POST',
             headers: {},
             data: {
@@ -134,7 +133,7 @@ export const useExternalApi = () => {
     const RegisterCuentaMedico = async (datos) => {
 
         const config = {
-            url: `http://127.0.0.1:8000/register/`,
+            url: `${api}/register/`,
             method: 'POST',
             headers: {},
             data: {
@@ -154,7 +153,7 @@ export const useExternalApi = () => {
     const RegisterCuentaPaciente = async (datos) => {
 
         const config = {
-            url: `http://127.0.0.1:8000/register/`,
+            url: `${api}/register/`,
             method: 'POST',
             headers: {},
             data: {
@@ -172,7 +171,7 @@ export const useExternalApi = () => {
     const loginAfterRegister = async (datos,setUser) => {
 
         const config = {
-            url: `http://127.0.0.1:8000/login/`,
+            url: `${api}/login/`,
             method: 'POST',
             headers: {},
             data: {

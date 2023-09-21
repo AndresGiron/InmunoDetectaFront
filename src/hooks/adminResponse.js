@@ -2,6 +2,8 @@ import axios from 'axios'
 
 export const useExternalApi = () => {
 
+    const api = process.env.REACT_APP_BACKEND_URL
+
     const makeRequest = async (options) => {
 
         try {
@@ -20,7 +22,7 @@ export const useExternalApi = () => {
 
     const traerUsuarios = async (setUsuarios) => {
         const config = {
-            url: `http://127.0.0.1:8000/get-user-medicos`,
+            url: `${api}/get-user-medicos`,
             method: 'GET',
             headers: {},
             data: {}
@@ -32,7 +34,7 @@ export const useExternalApi = () => {
 
     const cambiarEstado = async (userId) => {
         const config = {
-            url: `http://127.0.0.1:8000/cambiar-estado-usuario/`+ userId + "/",
+            url: `${api}/cambiar-estado-usuario/`+ userId + "/",
             method: 'PUT',
             headers: {},
             data: {}

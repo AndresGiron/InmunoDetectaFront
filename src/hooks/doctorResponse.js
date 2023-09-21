@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const useExternalApi = () => {
-
+    const api = process.env.REACT_APP_BACKEND_URL
     const makeRequest = async (options) => {
 
         try {
@@ -21,7 +21,7 @@ export const useExternalApi = () => {
     const traerDoctor = async (user,setDoctor) => {
         console.log(user)
         const config = {
-            url: `http://127.0.0.1:8000/get-medico-byemail/`+ user.email,
+            url: `${api}/get-medico-byemail/`+ user.email,
             method: 'GET',
             headers: {},
             data: {}
@@ -34,7 +34,7 @@ export const useExternalApi = () => {
     const actualizarDoctor = async (user,datos,setDoctor) => {
         console.log(user)
         const config = {
-            url: `http://127.0.0.1:8000/medico/`+user.email+`/update/`,
+            url: `${api}/medico/`+user.email+`/update/`,
             method: 'PUT',
             headers: {},
             data: datos
@@ -46,7 +46,7 @@ export const useExternalApi = () => {
 
     const traerDiagnosticos = async (setDiagnosticos) => {
         const config = {
-            url: `http://127.0.0.1:8000/get-all-diagnosticos`,
+            url: `${api}/get-all-diagnosticos`,
             method: 'GET',
             headers: {},
             data: {}

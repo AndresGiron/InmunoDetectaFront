@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const useExternalApi = () => {
-
+    const api = process.env.REACT_APP_BACKEND_URL
     const makeRequest = async (options) => {
 
         try {
@@ -21,7 +21,7 @@ export const useExternalApi = () => {
     const traerPaciente = async (user,setPaciente) => {
         console.log(user)
         const config = {
-            url: `http://127.0.0.1:8000/get-paciente-byemail/`+ user.email,
+            url: `${api}/get-paciente-byemail/`+ user.email,
             method: 'GET',
             headers: {},
             data: {}
@@ -34,7 +34,7 @@ export const useExternalApi = () => {
     const actualizarPaciente = async (user,datos,setPaciente) => {
         console.log(user)
         const config = {
-            url: `http://127.0.0.1:8000/paciente/`+user.email+`/update/`,
+            url: `${api}/paciente/`+user.email+`/update/`,
             method: 'PUT',
             headers: {},
             data: datos
@@ -46,7 +46,7 @@ export const useExternalApi = () => {
     
     const misDiagnosticos = async(paciente,setDiagnosticos) => {
         const config = {
-            url: `http://127.0.0.1:8000/get-diagnosticos-bypaciente/`+ paciente.cedula,
+            url: `${api}/get-diagnosticos-bypaciente/`+ paciente.cedula,
             method: 'GET',
             headers: {},
             data: {}
