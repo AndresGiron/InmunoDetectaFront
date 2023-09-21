@@ -102,7 +102,7 @@ function Login() {
                     <div className="mt-3">
                       <p className="mb-0  text-center">
                         ¿Aun no tienes una cuenta?{" "}
-                        <a href="/register" className="text-primary fw-bold">
+                        <a href="#/register" className="text-primary fw-bold">
                           Registrate
                         </a>
                       </p>

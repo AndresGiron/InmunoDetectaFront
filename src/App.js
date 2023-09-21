@@ -18,7 +18,7 @@ import UserContext from './userContext';
 
 
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Route,
   Routes,
   Navigate
