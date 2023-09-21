@@ -6,6 +6,8 @@ import { useContext } from "react";
 export const useExternalApi = () => {
     const {setUser} = useContext(UserContext);
     const navigate = useNavigate();
+    const api = process.env.REACT_APP_BACKEND_URL
+    console.log(api)
 
     const makeRequest = async (options) => {
 

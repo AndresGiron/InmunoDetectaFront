@@ -1,6 +1,6 @@
 import { ArcElement, BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Tooltip } from "chart.js";
 import React, { useEffect, useState } from "react";
-import { Form, Row, Col, Card } from "react-bootstrap";
+import { Form, Row, Col } from "react-bootstrap";
 import { Bar, Pie } from "react-chartjs-2";
 import Typewriter from "typewriter-effect";
 
