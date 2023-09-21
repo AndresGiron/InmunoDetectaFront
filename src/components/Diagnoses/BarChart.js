@@ -13,6 +13,7 @@ ChartJS.register(
 )
 
 const BarChart = ({ data }) => {
+    // eslint-disable-next-line no-unused-vars
     const [DatosDeEdad, setDatosDeEdad] = useState(
         data.map((item) => {
             return {
@@ -60,9 +61,9 @@ const BarChart = ({ data }) => {
         }
     };
 
-
-    const [chartData, setChartData] = useState({});
+    // eslint-disable-next-line no-unused-vars
     const [infeccionAsociada, setInfeccionAsociada] = useState(0);
+    // eslint-disable-next-line no-unused-vars
     const [infeccionNoAsociada, setInfeccionNoAsociada] = useState(0);
     const [Resultados, setResultados] = useState([])
     const gruposEdad = ["18-20", "21-30", "31-40", "41-50", "51-60", "61-70", "71-80", "81-90", "91-100"];
@@ -70,7 +71,7 @@ const BarChart = ({ data }) => {
 
     useEffect(() => {
         // Filtrar y contar las personas con Infección Asociada e Infección No Asociada por grupos de edad
-
+        
         const resultadosPorGrupo = gruposEdad.map((grupo) => {
             const rangoEdad = grupo.split("-").map(Number);
             const personasEnRango = DatosDeEdad.filter((persona) => {
@@ -94,11 +95,11 @@ const BarChart = ({ data }) => {
         });
 
         setResultados(resultadosPorGrupo)
-
+    // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
-
+        // eslint-disable-next-line
         const filteredData = DatosDeEdad.filter(item => {
             const fechaItem = new Date(item.Fecha);
             const fechaInicio = new Date(filterFechaInicio);
@@ -136,7 +137,7 @@ const BarChart = ({ data }) => {
         });
 
         setResultados(resultadosPorGrupo)
-
+    // eslint-disable-next-line
     }, [filterFechaInicio, filterFechaFin, filterGenero]);
 
 
