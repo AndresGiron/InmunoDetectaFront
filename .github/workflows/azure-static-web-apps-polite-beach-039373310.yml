@@ -31,6 +31,15 @@ jobs:
           api_location: "" # Api source code path - optional
           output_location: "build" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
+        env:
+          REACT_APP_BACKEND_URL:  ${{ secrets.REACT_APP_BACKEND_URL }}
+  secret_check:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Step 1
+      run: echo ", Quehubo mundo!"
+    - name: Paso 2
+      run: echo "El secreto es:${{ secrets.REACT_APP_BACKEND_URL }}"        
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
