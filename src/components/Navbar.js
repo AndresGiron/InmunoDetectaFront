@@ -67,14 +67,14 @@ function NavBar() {
             </Nav.Item>
 
             {(user === ""|| user.rol === "paciente") && <Nav.Item>
-              <Nav.Link as={Link} to="/calculadora" onClick={() => updateExpanded(false)}>
-                <AiOutlineCalculator style={{ marginBottom: "2px" }} /> Calcular
+              <Nav.Link as={Link} to="/diagnosticoIA" onClick={() => updateExpanded(false)}>
+                <AiOutlineCalculator style={{ marginBottom: "2px" }} /> Diagnostico Usando IA
               </Nav.Link>
             </Nav.Item>}
 
             {user !== "" && user.rol === "medico"&& <Nav.Item>
-              <Nav.Link as={Link} to="/calculadoraMedico" onClick={() => updateExpanded(false)}>
-                <AiOutlineCalculator style={{ marginBottom: "2px" }} /> Calcular
+              <Nav.Link as={Link} to="/diagnosticoIAMedico" onClick={() => updateExpanded(false)}>
+                <AiOutlineCalculator style={{ marginBottom: "2px" }} /> Diagnostico Usando IA
               </Nav.Link>
             </Nav.Item>}
 

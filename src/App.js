@@ -50,8 +50,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/project" element={<Projects />} />
-            <Route path="/calculadora" element={<Calculadora />} />
-            <Route path="/calculadoraMedico" element={(user !== "" && user.rol === "medico")?(<CalculadoraMedico />):(<Navigate to="/calculadora"/>)} />
+            <Route path="/diagnosticoIA" element={<Calculadora />} />
+            <Route path="/diagnosticoIAMedico" element={(user !== "" && user.rol === "medico")?(<CalculadoraMedico />):(<Navigate to="/calculadora"/>)} />
             <Route path="*" element={<Navigate to="/" />} />
             <Route path="/misDiagnosticos" element={(user !== "" && user.rol === "paciente")?(<Report />):(<Navigate to="/404"/>)} />
             <Route path="/profile" element={<Profile />} />

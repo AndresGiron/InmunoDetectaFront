@@ -768,7 +768,7 @@ function Calculadora() {
             </Form>
             <Row>
               <Card style={{ backgroundColor: 'transparent', border: 'none' }} >
-                <Col><Button onClick={registerSubmit(onSubmit)} style={{ zIndex: 1000 }}>Calcular</Button></Col>
+                <Col><Button onClick={registerSubmit(onSubmit)} style={{ zIndex: 1000 }}>Realizar Diagnostico</Button></Col>
               </Card>
             </Row>
           </Col>
