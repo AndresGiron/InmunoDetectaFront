@@ -776,7 +776,7 @@ function Calculadora() {
 
         <Modal show={show} onHide={handleClose} centered>
           <Modal.Header closeButton>
-            <Modal.Title>Resultado</Modal.Title>
+            <Modal.Title>Diagnostico</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {popUpText}
