@@ -90,7 +90,24 @@ const BarChart = ({ data }) => {
             (filterGenero === '' || item.Genero === filterGenero));
     })
 
-    const enfermedades = Object.keys(filteredData[0]).filter(enfermedad => enfermedad !== "Infeccion" && enfermedad !== "Fecha" && enfermedad !== "Genero");
+    const enfermedades = [
+        "VIH",
+        "Cardiopatia",
+        "Diabetes Mellitus",
+        "Dislipidemia",
+        "EPOC",
+        "Enfermedad cerebrovascular (ECV)",
+        "Hipotiroidismo",
+        "Insuficiencia venosa",
+        "Obesidad",
+        "Osteoporosis",
+        "Trastorno depresivo",
+        "Tuberculosis",
+        "Cáncer",
+        "Enfermedad renal cronica",
+        "HTA",
+        "Otras",
+    ]
 
     // Filtrar los datos para "Infección Asociada"
     const dataAsociada = enfermedades.map(enfermedad => {
@@ -207,7 +224,10 @@ const BarChart = ({ data }) => {
 
 
             </Row>
-            <Bar data={dataBarChart} options={optionsBarChart} />
+            <Row>
+                    {filteredData.length > 0 && <Bar data={dataBarChart} options={optionsBarChart} />}
+                    {filteredData.length === 0 && <h2>No hay datos para los filtros seleccionados</h2>}
+            </Row>
         </div>
     );
 }

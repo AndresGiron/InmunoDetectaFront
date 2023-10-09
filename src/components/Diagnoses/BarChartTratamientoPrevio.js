@@ -15,7 +15,6 @@ ChartJS.register(
 )
 
 const BarChart = ({ data }) => {
-    console.log(data)
     const [DatosDeComorbilidades, setDatosDeComorbilidades] = useState(
         data.map((item) => {
             return {
@@ -39,9 +38,6 @@ const BarChart = ({ data }) => {
             }
         })
     )
-
-
-    console.log(DatosDeComorbilidades)
 
     const getToday = () => {
         const today = new Date();
@@ -89,7 +85,22 @@ const BarChart = ({ data }) => {
             (filterGenero === '' || item.Genero === filterGenero));
     })
 
-    const tratamientos = Object.keys(filteredData[0]).filter(tratamiento => tratamiento !== "Infeccion" && tratamiento !== "Fecha" && tratamiento !== "Genero" && tratamiento !== "Tenía tratamiento reumatologico previo");
+    const tratamientos = [
+        "Esteroide",
+        "Antimalarico",
+        "Leflunomida",
+        "Metotrexate",
+        "Sulfasalazina",
+        "Biológico",
+        "Azatioprina",
+        "Ciclofosfamida",
+        "Micofenolato",
+        "Tacrolimus",
+        "Hipouricemiante",
+        "Ciclosporina",
+        "Otro",
+    ]
+
 
     // Filtrar los datos para "Infección Asociada"
     const dataAsociada = tratamientos.map(tratamiento => {
@@ -103,8 +114,6 @@ const BarChart = ({ data }) => {
         return count;
     });
 
-    console.log(dataAsociada, dataNoAsociada)
-
     const tratamientoData = filteredData.reduce((counts, item) => {
         if (item["Tenía tratamiento reumatologico previo"] === 0) {
             counts.tratamiento++;
@@ -115,8 +124,6 @@ const BarChart = ({ data }) => {
     }, { tratamiento: 0, noTratamiento: 0 });
 
     const { tratamiento, noTratamiento } = tratamientoData;
-
-    console.log(tratamientoData)
 
 
     // Configuración de datos para el gráfico de pastel
@@ -264,14 +271,15 @@ const BarChart = ({ data }) => {
             <Row>
             
             <Row md = {9}>
-            
-                    <Bar data={dataBarChart} options={optionsBarChart} />
+        
+                    {filteredData.length > 0 && <Bar data={dataBarChart} options={optionsBarChart} />}
+                    {filteredData.length === 0 && <h2>No hay datos para los filtros seleccionados</h2>}
             </Row>
             <Row md = {6}>
                 
                     <Col></Col>
                     <Col md = {8}>
-                    <Pie data={dataTratamiento} options={optionsPieChart} />
+                    {filteredData.length > 0 && <Pie data={dataTratamiento} options={optionsPieChart} />}
                     </Col>
                     <Col></Col>  
             </Row>

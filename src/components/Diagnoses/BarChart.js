@@ -238,7 +238,11 @@ const BarChart = ({ data }) => {
 
 
             </Row>
-            <Bar data={chartDataBar} options={chartOptions} />
+            
+            <Row>
+                {cantidadFiltrada > 0 && <Bar data={chartDataBar} options={chartOptions} />}
+                {cantidadFiltrada === 0 && <h2>No hay datos para los filtros seleccionados</h2>}
+            </Row>
         </div>
     );
 }

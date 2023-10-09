@@ -12,6 +12,7 @@ import Alert from 'react-bootstrap/Alert';
 function Register() {
 
     const [passwordError, setPasswordError] = useState('');
+    const [correoError, setCorreoError] = useState('');
     const navigate = useNavigate();
     const [mensaje,setMensaje] = useState("")
     const [show, setShow] = useState(false);
@@ -57,7 +58,7 @@ function Register() {
         ]
 
     const {RegisterPaciente,RegisterMedico} = useExternalApi()
-
+    const emailRegex = /^[A-Za-z0-9._%+-]+@([A-Za-z0-9.-]+\.[A-Za-z]{2,})+$/;
 
 
     const onSubmit = data => {
@@ -87,6 +88,8 @@ function Register() {
 
         if (Object.keys(errors).length > 0) {
             setFormErrors(errors);
+        }else if (!emailRegex.test(data.correo)){
+            setCorreoError('Formato de correo invalido')
         } else if (data.password !== data.conPassword) {
             setPasswordError('Las contraseñas no coinciden');
         } else if (data.password.length < 8 || !/\d/.test(data.password)) {
@@ -102,6 +105,7 @@ function Register() {
                 RegisterPaciente(data,setMensaje,setShow)
             }
             setPasswordError('');
+            setCorreoError('');
             setFormErrors({
                 correo: false,
                 password: false,
@@ -162,6 +166,7 @@ function Register() {
                                                         {...datos("correo", { required: false })}
                                                         isInvalid={formErrors.correo} />
                                                 </Form.Group>
+                                                {correoError && <div className="text-danger">{correoError}</div>}
                                             </Row>
 
                                             <Row>

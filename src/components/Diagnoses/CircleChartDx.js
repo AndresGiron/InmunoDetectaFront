@@ -48,8 +48,6 @@ const CircleChartDx = ({ data }) => {
         })
     )
 
-    console.log(DatosDx)
-
     const getToday = () => {
         const today = new Date();
         const formattedDate = today.toISOString().split('T')[0];
@@ -100,7 +98,6 @@ const CircleChartDx = ({ data }) => {
 
     filteredData.forEach((item) => {
         const Dx = item["Dx reumatologico final agrupado"];
-        console.log(Dx)
 
         if (item.Infeccion === "Infeccion asociada") {
             if (!countsAsociada[Dx]) {
@@ -222,7 +219,8 @@ const CircleChartDx = ({ data }) => {
             <Row>
             <Col></Col>
                 <Col md = {10}>
-                    <Doughnut data={dataCombined} options={optionsCombined} />
+                    {filteredData.length > 0 && <Doughnut data={dataCombined} options={optionsCombined} />}
+                    {filteredData.length === 0 && <h2>No hay datos para los filtros seleccionados</h2>}
                 </Col>
                 <Col></Col>
             </Row>

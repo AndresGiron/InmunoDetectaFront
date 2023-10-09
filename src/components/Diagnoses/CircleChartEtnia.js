@@ -209,7 +209,8 @@ const CircleChartEtnia = ({ data }) => {
             <Row>
             <Col></Col>
                 <Col md = {10}>
-                    <Doughnut data={dataCombined} options={optionsCombined} />
+                    {filteredData.length > 0 && <Doughnut data={dataCombined} options={optionsCombined} />}
+                    {filteredData.length === 0 && <h2>No hay datos para los filtros seleccionados</h2>}
                 </Col>
                 <Col></Col>
             </Row>
