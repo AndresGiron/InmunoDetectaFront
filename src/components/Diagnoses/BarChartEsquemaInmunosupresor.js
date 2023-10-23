@@ -15,22 +15,26 @@ ChartJS.register(
 )
 
 const BarChart = ({ data }) => {
-    const [DatosDeComorbilidades, setDatosDeComorbilidades] = useState(
-        data.map((item) => {
-            return {
-                "Infeccion": item.diagnostico_completo["Infeccion asociada a la enfermedad"],
-                "Fecha": item.diagnostico_fecha,
-                "Genero": item.diagnostico_completo["Genero"],
-                "Recibió esquema inmunosupresor en la hospitalizacion": item.diagnostico_completo["Recibió esquema inmunosupresor en la hospitalizacion"],
-                "Esteroide": item.diagnostico_completo["Esteroide_1"],
-                "Antimalarico": item.diagnostico_completo["Azatioprina_1"],
-                "Ciclofosfamida": item.diagnostico_completo["Ciclofosfamida_1"],
-                "Micofenolato": item.diagnostico_completo["Micofenolato_1"],
-                "Tracolimus": item.diagnostico_completo["Tracolimus_1"],
-                "Ciclosporina": item.diagnostico_completo["Ciclosporina_1"],
-            }
-        })
-    )
+    const [DatosDeComorbilidades, setDatosDeComorbilidades] = useState([])
+
+    useEffect(()=>{
+        setDatosDeComorbilidades(
+            data.map((item) => {
+                return {
+                    "Infeccion": item.diagnostico_completo["Infeccion asociada a la enfermedad"],
+                    "Fecha": item.diagnostico_fecha,
+                    "Genero": item.diagnostico_completo["Genero"],
+                    "Recibió esquema inmunosupresor en la hospitalizacion": item.diagnostico_completo["Recibió esquema inmunosupresor en la hospitalizacion"],
+                    "Esteroide": item.diagnostico_completo["Esteroide_1"],
+                    "Antimalarico": item.diagnostico_completo["Azatioprina_1"],
+                    "Ciclofosfamida": item.diagnostico_completo["Ciclofosfamida_1"],
+                    "Micofenolato": item.diagnostico_completo["Micofenolato_1"],
+                    "Tracolimus": item.diagnostico_completo["Tracolimus_1"],
+                    "Ciclosporina": item.diagnostico_completo["Ciclosporina_1"],
+                }
+            })
+        )
+    },[data])
 
     const getToday = () => {
         const today = new Date();

@@ -13,40 +13,46 @@ ChartJS.register(
 
 const CircleChartDx = ({ data }) => {
     const [DatosDx, setDatosDx] = useState(
-        data.map((item) => {
-            if (item.diagnostico_completo["Dx reumatologico final agrupado"] === "0") {
-                item.diagnostico_completo["Dx reumatologico final agrupado"] = "Sin enfermedad reumatica"
-            } else if (item.diagnostico_completo["Dx reumatologico final agrupado"] === "1") {
-                item.diagnostico_completo["Dx reumatologico final agrupado"] = "Posible enfermedad reumatica a estudio"
-            } else if (item.diagnostico_completo["Dx reumatologico final agrupado"] === "2") {
-                item.diagnostico_completo["Dx reumatologico final agrupado"] = "LES"
-            } else if (item.diagnostico_completo["Dx reumatologico final agrupado"] === "3") {
-                item.diagnostico_completo["Dx reumatologico final agrupado"] = "Artritis reumatoide"
-            } else if (item.diagnostico_completo["Dx reumatologico final agrupado"] === "4") {
-                item.diagnostico_completo["Dx reumatologico final agrupado"] = "Esclerosis Sistemica"
-            } else if (item.diagnostico_completo["Dx reumatologico final agrupado"] === "5") {
-                item.diagnostico_completo["Dx reumatologico final agrupado"] = "Vasculitis"
-            } else if (item.diagnostico_completo["Dx reumatologico final agrupado"] === "6") {
-                item.diagnostico_completo["Dx reumatologico final agrupado"] = "Sindrome de Sjogren"
-            } else if (item.diagnostico_completo["Dx reumatologico final agrupado"] === "7") {
-                item.diagnostico_completo["Dx reumatologico final agrupado"] = "Enfermedad articular por cristales: gota y CPPD"
-            } else if (item.diagnostico_completo["Dx reumatologico final agrupado"] === "8") {
-                item.diagnostico_completo["Dx reumatologico final agrupado"] = "Otro diagnostico reumatologico"
-            } else if (item.diagnostico_completo["Dx reumatologico final agrupado"] === "9") {
-                item.diagnostico_completo["Dx reumatologico final agrupado"] = "SAF"
-            } else if (item.diagnostico_completo["Dx reumatologico final agrupado"] === "10") {
-                item.diagnostico_completo["Dx reumatologico final agrupado"] = "Miopatia inflamatoria"
-            } 
-            
-            return {
-                "Infeccion": item.diagnostico_completo["Infeccion asociada a la enfermedad"],
-                "Fecha": item.diagnostico_fecha,
-                "Dx reumatologico final agrupado": item.diagnostico_completo["Dx reumatologico final agrupado"],
-                "Genero": item.diagnostico_completo["Genero"]
-
-            }
-        })
+        []
     )
+
+    useEffect(()=>{
+        setDatosDx(
+            data.map((item) => {
+                if (item.diagnostico_completo["Dx reumatologico final agrupado"] === "0") {
+                    item.diagnostico_completo["Dx reumatologico final agrupado"] = "Sin enfermedad reumatica"
+                } else if (item.diagnostico_completo["Dx reumatologico final agrupado"] === "1") {
+                    item.diagnostico_completo["Dx reumatologico final agrupado"] = "Posible enfermedad reumatica a estudio"
+                } else if (item.diagnostico_completo["Dx reumatologico final agrupado"] === "2") {
+                    item.diagnostico_completo["Dx reumatologico final agrupado"] = "LES"
+                } else if (item.diagnostico_completo["Dx reumatologico final agrupado"] === "3") {
+                    item.diagnostico_completo["Dx reumatologico final agrupado"] = "Artritis reumatoide"
+                } else if (item.diagnostico_completo["Dx reumatologico final agrupado"] === "4") {
+                    item.diagnostico_completo["Dx reumatologico final agrupado"] = "Esclerosis Sistemica"
+                } else if (item.diagnostico_completo["Dx reumatologico final agrupado"] === "5") {
+                    item.diagnostico_completo["Dx reumatologico final agrupado"] = "Vasculitis"
+                } else if (item.diagnostico_completo["Dx reumatologico final agrupado"] === "6") {
+                    item.diagnostico_completo["Dx reumatologico final agrupado"] = "Sindrome de Sjogren"
+                } else if (item.diagnostico_completo["Dx reumatologico final agrupado"] === "7") {
+                    item.diagnostico_completo["Dx reumatologico final agrupado"] = "Enfermedad articular por cristales: gota y CPPD"
+                } else if (item.diagnostico_completo["Dx reumatologico final agrupado"] === "8") {
+                    item.diagnostico_completo["Dx reumatologico final agrupado"] = "Otro diagnostico reumatologico"
+                } else if (item.diagnostico_completo["Dx reumatologico final agrupado"] === "9") {
+                    item.diagnostico_completo["Dx reumatologico final agrupado"] = "SAF"
+                } else if (item.diagnostico_completo["Dx reumatologico final agrupado"] === "10") {
+                    item.diagnostico_completo["Dx reumatologico final agrupado"] = "Miopatia inflamatoria"
+                } 
+                
+                return {
+                    "Infeccion": item.diagnostico_completo["Infeccion asociada a la enfermedad"],
+                    "Fecha": item.diagnostico_fecha,
+                    "Dx reumatologico final agrupado": item.diagnostico_completo["Dx reumatologico final agrupado"],
+                    "Genero": item.diagnostico_completo["Genero"]
+    
+                }
+            })
+        )
+    },[data])
 
     const getToday = () => {
         const today = new Date();

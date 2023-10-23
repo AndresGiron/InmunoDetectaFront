@@ -44,6 +44,19 @@ export const useExternalApi = () => {
         setDoctor(data)
     }
 
+    const actualizarDiagnostico = async (id_diagnostico,estado) => {
+        console.log("id diagnostico",id_diagnostico)
+        console.log(estado)
+        const config = {
+            url: `${api}/diagnostico-update/`+id_diagnostico+`/`,
+            method: 'PUT',
+            headers: {},
+            data: {"diagnostico_aprobacion":estado}
+        }
+        const data = await makeRequest({config})
+        console.log(data)
+    }
+
     const traerDiagnosticos = async (setDiagnosticos) => {
         const config = {
             url: `${api}/get-all-diagnosticos`,
@@ -69,7 +82,7 @@ export const useExternalApi = () => {
             return [{"Result":"No hay diagnosticos"}]
         }
 
-        console.log(data)
+        console.log("diagnosticos",data)
         setDiagnosticos(data)
     }
 
@@ -78,6 +91,7 @@ export const useExternalApi = () => {
     return {
         traerDoctor,
         actualizarDoctor,
-        traerDiagnosticos
+        traerDiagnosticos,
+        actualizarDiagnostico
     }
 }

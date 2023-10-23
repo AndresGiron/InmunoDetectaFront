@@ -14,17 +14,21 @@ ChartJS.register(
 
 const BarChart = ({ data }) => {
     // eslint-disable-next-line no-unused-vars
-    const [DatosDeEdad, setDatosDeEdad] = useState(
-        data.map((item) => {
-            return {
-                "Edad": item.diagnostico_completo["Edad al momento del evento"],
-                "Infeccion": item.diagnostico_completo["Infeccion asociada a la enfermedad"],
-                "Fecha": item.diagnostico_fecha,
-                "Genero": item.diagnostico_completo["Genero"]
+    const [DatosDeEdad, setDatosDeEdad] = useState([])
 
-            }
-        })
-    )
+    useEffect(()=>{
+        setDatosDeEdad(
+            data.map((item) => {
+                return {
+                    "Edad": item.diagnostico_completo["Edad al momento del evento"],
+                    "Infeccion": item.diagnostico_completo["Infeccion asociada a la enfermedad"],
+                    "Fecha": item.diagnostico_fecha,
+                    "Genero": item.diagnostico_completo["Genero"]
+    
+                }
+            })
+        )
+    },[data])
 
     const getToday = () => {
         const today = new Date();
@@ -96,7 +100,7 @@ const BarChart = ({ data }) => {
 
         setResultados(resultadosPorGrupo)
     // eslint-disable-next-line
-    }, []);
+    }, [DatosDeEdad]);
 
     useEffect(() => {
         // eslint-disable-next-line
@@ -138,7 +142,7 @@ const BarChart = ({ data }) => {
 
         setResultados(resultadosPorGrupo)
     // eslint-disable-next-line
-    }, [filterFechaInicio, filterFechaFin, filterGenero]);
+    }, [filterFechaInicio, filterFechaFin, filterGenero,DatosDeEdad]);
 
 
     const chartDataBar = {

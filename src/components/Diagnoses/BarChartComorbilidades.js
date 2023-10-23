@@ -13,36 +13,35 @@ ChartJS.register(
 )
 
 const BarChart = ({ data }) => {
-    console.log(data)
-    const [DatosDeComorbilidades, setDatosDeComorbilidades] = useState(
-        data.map((item) => {
-            return {
-                "Infeccion": item.diagnostico_completo["Infeccion asociada a la enfermedad"],
-                "Fecha": item.diagnostico_fecha,
-                "Genero": item.diagnostico_completo["Genero"],
-                "VIH": item.diagnostico_completo["Coomorbilidades previas  - Infeccion por VIH"],
-                "Cardiopatia": item.diagnostico_completo["Coomorbilidades previas - Cardiopatia"],
-                "Diabetes Mellitus": item.diagnostico_completo["Coomorbilidades previas - Diabetes Mellitus"],
-                "Dislipidemia": item.diagnostico_completo["Coomorbilidades previas - Dislipidemia "],
-                "EPOC": item.diagnostico_completo["Coomorbilidades previas - EPOC"],
-                "Enfermedad cerebrovascular (ECV)": item.diagnostico_completo["Coomorbilidades previas - Enfermedad cerebrovascular (ECV)"],
-                "Hipotiroidismo": item.diagnostico_completo["Coomorbilidades previas - Hipotiroidismo"],
-                "Insuficiencia venosa": item.diagnostico_completo["Coomorbilidades previas - Insuficiencia venosa "],
-                "Obesidad": item.diagnostico_completo["Coomorbilidades previas - Obesidad"],
-                "Osteoporosis": item.diagnostico_completo["Coomorbilidades previas - Osteoporosis"],
-                "Trastorno depresivo": item.diagnostico_completo["Coomorbilidades previas - Trastorno depresivo "],
-                "Tuberculosis": item.diagnostico_completo["Coomorbilidades previas -Tuberculosis"],
-                "Cáncer": item.diagnostico_completo["Coomorbilidades previas Cáncer"],
-                "Enfermedad renal cronica": item.diagnostico_completo["Coomorbilidades previas Enfermedad renal cronica"],
-                "HTA": item.diagnostico_completo["Coomorbilidades previas- HTA"],
-                "Otras": item.diagnostico_completo["Coomorbilidades previas - Otras"],
-
-            }
-        })
-    )
-
+    const [DatosDeComorbilidades, setDatosDeComorbilidades] = useState([])
+    useEffect(()=>{
+        setDatosDeComorbilidades(
+            data.map((item) => {
+                return {
+                    "Infeccion": item.diagnostico_completo["Infeccion asociada a la enfermedad"],
+                    "Fecha": item.diagnostico_fecha,
+                    "Genero": item.diagnostico_completo["Genero"],
+                    "VIH": item.diagnostico_completo["Coomorbilidades previas  - Infeccion por VIH"],
+                    "Cardiopatia": item.diagnostico_completo["Coomorbilidades previas - Cardiopatia"],
+                    "Diabetes Mellitus": item.diagnostico_completo["Coomorbilidades previas - Diabetes Mellitus"],
+                    "Dislipidemia": item.diagnostico_completo["Coomorbilidades previas - Dislipidemia "],
+                    "EPOC": item.diagnostico_completo["Coomorbilidades previas - EPOC"],
+                    "Enfermedad cerebrovascular (ECV)": item.diagnostico_completo["Coomorbilidades previas - Enfermedad cerebrovascular (ECV)"],
+                    "Hipotiroidismo": item.diagnostico_completo["Coomorbilidades previas - Hipotiroidismo"],
+                    "Insuficiencia venosa": item.diagnostico_completo["Coomorbilidades previas - Insuficiencia venosa "],
+                    "Obesidad": item.diagnostico_completo["Coomorbilidades previas - Obesidad"],
+                    "Osteoporosis": item.diagnostico_completo["Coomorbilidades previas - Osteoporosis"],
+                    "Trastorno depresivo": item.diagnostico_completo["Coomorbilidades previas - Trastorno depresivo "],
+                    "Tuberculosis": item.diagnostico_completo["Coomorbilidades previas -Tuberculosis"],
+                    "Cáncer": item.diagnostico_completo["Coomorbilidades previas Cáncer"],
+                    "Enfermedad renal cronica": item.diagnostico_completo["Coomorbilidades previas Enfermedad renal cronica"],
+                    "HTA": item.diagnostico_completo["Coomorbilidades previas- HTA"],
+                    "Otras": item.diagnostico_completo["Coomorbilidades previas - Otras"],
     
-    console.log(DatosDeComorbilidades)
+                }
+            })
+        )
+    },[data])
 
     const getToday = () => {
         const today = new Date();
@@ -120,8 +119,6 @@ const BarChart = ({ data }) => {
         const count = filteredData.filter(item => item.Infeccion === "Infeccion NO asociada" && item[enfermedad] === 0).length;
         return count;
     });
-
-    console.log(dataAsociada,dataNoAsociada)
 
     const dataBarChart = {
         labels: enfermedades,

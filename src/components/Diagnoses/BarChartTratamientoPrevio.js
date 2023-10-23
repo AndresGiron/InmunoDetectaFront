@@ -15,29 +15,34 @@ ChartJS.register(
 )
 
 const BarChart = ({ data }) => {
-    const [DatosDeComorbilidades, setDatosDeComorbilidades] = useState(
-        data.map((item) => {
-            return {
-                "Infeccion": item.diagnostico_completo["Infeccion asociada a la enfermedad"],
-                "Fecha": item.diagnostico_fecha,
-                "Genero": item.diagnostico_completo["Genero"],
-                "Tenía tratamiento reumatologico previo": item.diagnostico_completo["Tenía tratamiento reumatologico previo"],
-                "Esteroide": item.diagnostico_completo["Esteroide"],
-                "Antimalarico": item.diagnostico_completo["Antimalarico"],
-                "Leflunomida": item.diagnostico_completo["Leflunomida"],
-                "Metotrexate": item.diagnostico_completo["Metotrexate"],
-                "Sulfasalazina": item.diagnostico_completo["Sulfasalazina"],
-                "Biológico": item.diagnostico_completo["Biológico"],
-                "Azatioprina": item.diagnostico_completo["Azatioprina"],
-                "Ciclofosfamida": item.diagnostico_completo["Ciclofosfamida"],
-                "Micofenolato": item.diagnostico_completo["Micofenolato"],
-                "Tacrolimus": item.diagnostico_completo["Tacrolimus"],
-                "Hipouricemiante": item.diagnostico_completo["Hipouricemiante"],
-                "Ciclosporina": item.diagnostico_completo["Ciclosporina"],
-                "Otro": item.diagnostico_completo["Otro"],
-            }
-        })
-    )
+    const [DatosDeComorbilidades, setDatosDeComorbilidades] = useState([])
+
+    useEffect(()=>{
+        setDatosDeComorbilidades(
+            data.map((item) => {
+                return {
+                    "Infeccion": item.diagnostico_completo["Infeccion asociada a la enfermedad"],
+                    "Fecha": item.diagnostico_fecha,
+                    "Genero": item.diagnostico_completo["Genero"],
+                    "Tenía tratamiento reumatologico previo": item.diagnostico_completo["Tenía tratamiento reumatologico previo"],
+                    "Esteroide": item.diagnostico_completo["Esteroide"],
+                    "Antimalarico": item.diagnostico_completo["Antimalarico"],
+                    "Leflunomida": item.diagnostico_completo["Leflunomida"],
+                    "Metotrexate": item.diagnostico_completo["Metotrexate"],
+                    "Sulfasalazina": item.diagnostico_completo["Sulfasalazina"],
+                    "Biológico": item.diagnostico_completo["Biológico"],
+                    "Azatioprina": item.diagnostico_completo["Azatioprina"],
+                    "Ciclofosfamida": item.diagnostico_completo["Ciclofosfamida"],
+                    "Micofenolato": item.diagnostico_completo["Micofenolato"],
+                    "Tacrolimus": item.diagnostico_completo["Tacrolimus"],
+                    "Hipouricemiante": item.diagnostico_completo["Hipouricemiante"],
+                    "Ciclosporina": item.diagnostico_completo["Ciclosporina"],
+                    "Otro": item.diagnostico_completo["Otro"],
+                }
+            })
+        )
+
+    },[data])
 
     const getToday = () => {
         const today = new Date();

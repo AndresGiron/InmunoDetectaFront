@@ -13,30 +13,36 @@ ChartJS.register(
 
 const CircleChartEtnia = ({ data }) => {
     const [DatosDeEtnia, setDatosDeEtnia] = useState(
-        data.map((item) => {
-            if (item.diagnostico_completo["Etnia"] === "0") {
-                item.diagnostico_completo["Etnia"] = "Mestizo"
-
-            } else if (item.diagnostico_completo["Etnia"] === "1") {
-                item.diagnostico_completo["Etnia"] = "Indigena"
-
-            } else if (item.diagnostico_completo["Etnia"] === "2") {
-                item.diagnostico_completo["Etnia"] = "Afrodescendiente"
-
-            } else if (item.diagnostico_completo["Etnia"] === "3") {
-                item.diagnostico_completo["Etnia"] = "Otro"
-            } else if (item.diagnostico_completo["Etnia"] === null) {
-                item.diagnostico_completo["Etnia"] = "Sin dato"
-            }
-            return {
-                "Infeccion": item.diagnostico_completo["Infeccion asociada a la enfermedad"],
-                "Fecha": item.diagnostico_fecha,
-                "Etnia": item.diagnostico_completo["Etnia"],
-                "Genero": item.diagnostico_completo["Genero"]
-
-            }
-        })
+        []
     )
+
+    useEffect(()=>{
+        setDatosDeEtnia(
+            data.map((item) => {
+                if (item.diagnostico_completo["Etnia"] === "0") {
+                    item.diagnostico_completo["Etnia"] = "Mestizo"
+    
+                } else if (item.diagnostico_completo["Etnia"] === "1") {
+                    item.diagnostico_completo["Etnia"] = "Indigena"
+    
+                } else if (item.diagnostico_completo["Etnia"] === "2") {
+                    item.diagnostico_completo["Etnia"] = "Afrodescendiente"
+    
+                } else if (item.diagnostico_completo["Etnia"] === "3") {
+                    item.diagnostico_completo["Etnia"] = "Otro"
+                } else if (item.diagnostico_completo["Etnia"] === null) {
+                    item.diagnostico_completo["Etnia"] = "Sin dato"
+                }
+                return {
+                    "Infeccion": item.diagnostico_completo["Infeccion asociada a la enfermedad"],
+                    "Fecha": item.diagnostico_fecha,
+                    "Etnia": item.diagnostico_completo["Etnia"],
+                    "Genero": item.diagnostico_completo["Genero"]
+    
+                }
+            })
+        )
+    },[data])
 
     const getToday = () => {
         const today = new Date();

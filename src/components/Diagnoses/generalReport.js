@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Card, Form, Container, Row, Button, Col } from 'react-bootstrap';
+import { Table, Card, Form, Container, Row, Button, Col, Modal } from 'react-bootstrap';
 import { useExternalApi } from '../../hooks/doctorResponse';
 import Typewriter from "typewriter-effect";
 import Particle from "../Particle";
@@ -11,6 +11,9 @@ import BarChartEsquemaInmunosupresor from './BarChartEsquemaInmunosupresor';
 import CircleChartEtnia from './CircleChartEtnia'
 import CircleChartDx from './CircleChartDx';
 import * as XLSX from 'xlsx';
+import {
+    AiOutlineCheck, AiOutlineClose
+} from "react-icons/ai";
 
 
 const GeneralReport = () => {
@@ -21,8 +24,13 @@ const GeneralReport = () => {
     const [filterPaciente, setfilterPaciente] = useState('');
     const [filterEdadOrden, setFilterEdadOrden] = useState('asc');
     const [filterResultado, setFilterResultado] = useState('');
+    const [filterEstado, setFilterEstado] = useState('');
+    const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+    const [selectedDiagnostic, setSelectedDiagnostic] = useState(null);
+    const [selectedAction, setSelectedAction] = useState("");
     const [DiagnosticosInfeccionAsociada, setDiagnosticosInfeccionAsociada] = useState(0);
     const [DiagnosticosInfeccionNOAsociada, setDiagnosticosInfeccionNoAsociada] = useState(0);
+    const [approvedDiagnosticos, setApprovedDiagnosticos] = useState([]);
 
     // Función para obtener la fecha actual
     const getToday = () => {
@@ -43,12 +51,18 @@ const GeneralReport = () => {
     const [filterFechaFin, setFilterFechaFin] = useState(getToday());
 
     const {
-        traerDiagnosticos
+        traerDiagnosticos,
+        actualizarDiagnostico
     } = useExternalApi()
 
     useEffect(() => {
         traerDiagnosticos(setDiagnosticos)
     }, []);
+
+    useEffect(() => {
+        // Inicializa los diagnósticos aprobados al inicio, cuando se carga la página
+        setApprovedDiagnosticos(diagnosticos.filter(item => item.diagnostico_aprobacion === true));
+    }, [diagnosticos]); // Asegúrate de que se actualice cuando cambian los diagnosticos
 
     const tieneClaveEspecifica = (lista, clave) => {
         return lista.some(obj => obj.hasOwnProperty(clave));
@@ -79,7 +93,12 @@ const GeneralReport = () => {
                 item.cedula_medico.toLowerCase().includes(filterMedico.toLowerCase())) &&
             (item.paciente_nombre_apellido.toLowerCase().includes(filterPaciente.toLowerCase()) ||
                 item.cedula_paciente.toLowerCase().includes(filterPaciente.toLowerCase())) &&
-            (filterResultado === '' || item.diagnostico_completo["Infeccion asociada a la enfermedad"] === filterResultado)
+            (filterResultado === '' || item.diagnostico_completo["Infeccion asociada a la enfermedad"] === filterResultado) &&
+            (filterEstado === '' || (
+                (filterEstado === 'Aprobado' && item.diagnostico_aprobacion === true) ||
+                (filterEstado === 'No Aprobado' && item.diagnostico_aprobacion === false) ||
+                (filterEstado === 'No Evaluado' && item.diagnostico_aprobacion === null)
+            ))
         );
     })
 
@@ -112,17 +131,110 @@ const GeneralReport = () => {
         setCurrentPage(selectedPage);
     };
 
+    //const approvedDiagnosticos = diagnosticos.filter(item => item.diagnostico_aprobacion === true);
+
     const exportToExcel = () => {
         const fileName = 'diagnosticos.xlsx';
-        const ws = XLSX.utils.json_to_sheet(diagnosticos.map(item => item.diagnostico_completo));
+        const ws = XLSX.utils.json_to_sheet(approvedDiagnosticos.map(item => item.diagnostico_completo));
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, 'Diagnósticos');
         XLSX.writeFile(wb, fileName);
     };
 
-    const infecciones = diagnosticos.map(item => item.diagnostico_completo["Infeccion asociada a la enfermedad"]);
+    const infecciones = approvedDiagnosticos.map(item => item.diagnostico_completo["Infeccion asociada a la enfermedad"]);
 
+    const handleApprove = (item) => {
+        actualizarDiagnostico(item.diagnostico_id, true)
+            .then((response) => {
+                // Si la solicitud es exitosa, actualiza el estado local
+                const updatedDiagnosticos = diagnosticos.map((diagnostico) => {
+                    if (diagnostico.diagnostico_id === item.diagnostico_id) {
+                        return {
+                            ...diagnostico,
+                            diagnostico_aprobacion: true,
+                        };
+                    }
+                    return diagnostico;
+                });
+                setDiagnosticos(updatedDiagnosticos);
 
+                const updatedApprovedDiagnosticos = approvedDiagnosticos.map((diagnostico) => {
+                    if (diagnostico.diagnostico_id === item.diagnostico_id) {
+                        return {
+                            ...diagnostico,
+                            diagnostico_aprobacion: true,
+                        };
+                    }
+                    return diagnostico;
+                });
+
+                setApprovedDiagnosticos(updatedApprovedDiagnosticos);
+
+            })
+            .catch((error) => {
+                // Manejar errores si es necesario
+            });
+
+    }
+
+    const handleDisapprove = (item) => {
+        actualizarDiagnostico(item.diagnostico_id, false)
+            .then((response) => {
+                // Si la solicitud es exitosa, actualiza el estado local
+                const updatedDiagnosticos = diagnosticos.map((diagnostico) => {
+                    if (diagnostico.diagnostico_id === item.diagnostico_id) {
+                        return {
+                            ...diagnostico,
+                            diagnostico_aprobacion: false,
+                        };
+                    }
+                    return diagnostico;
+                });
+                setDiagnosticos(updatedDiagnosticos);
+
+                const updatedApprovedDiagnosticos = approvedDiagnosticos.map((diagnostico) => {
+                    if (diagnostico.diagnostico_id === item.diagnostico_id) {
+                        return {
+                            ...diagnostico,
+                            diagnostico_aprobacion: false,
+                        };
+                    }
+                    return diagnostico;
+                });
+
+                setApprovedDiagnosticos(updatedApprovedDiagnosticos);
+            })
+            .catch((error) => {
+                // Manejar errores si es necesario
+            });
+
+    }
+
+    const handleShowConfirmationModal = (item, action) => {
+        setSelectedDiagnostic(item);
+        setSelectedAction(action);
+        console.log("accion a realizar", action, selectedAction)
+        setShowConfirmationModal(true);
+    };
+
+    const handleCloseConfirmationModal = () => {
+        setShowConfirmationModal(false);
+    };
+
+    const handleConfirmAction = () => {
+        // Realiza la acción (por ejemplo, aprobar o no aprobar) aquí
+        if (selectedAction === "approve") {
+            // Realiza la aprobación
+            console.log("Entro en aprobar")
+            handleApprove(selectedDiagnostic, true);
+        } else if (selectedAction === "disapprove") {
+            // Realiza la no aprobación
+            console.log("Entro en no aprobar")
+            handleDisapprove(selectedDiagnostic, false);
+        }
+
+        setShowConfirmationModal(false);
+    };
 
     if (!diagnosticos || Object.keys(diagnosticos).length === 0 || diagnosticos === []) {
         return <div className="circle-loader">
@@ -205,6 +317,18 @@ const GeneralReport = () => {
                                                     <option value="Infeccion NO asociada">Infección NO Asociada</option>
                                                 </Form.Control>
                                             </th>
+                                            <th>
+                                                <Form.Control
+                                                    as="select"
+                                                    value={filterEstado}
+                                                    onChange={e => setFilterEstado(e.target.value)}
+                                                >
+                                                    <option value="">Todos</option>
+                                                    <option value="Aprobado">Aprobado</option>
+                                                    <option value="No Aprobado">No Aprobado</option>
+                                                    <option value="No Evaluado">No Evaluado</option>
+                                                </Form.Control>
+                                            </th>
 
                                         </tr>
                                         <tr className="AdminTableTitle" style={{ backgroundColor: '#430054', color: '#eaf8ff' }}>
@@ -212,6 +336,7 @@ const GeneralReport = () => {
                                             <th>Medico</th>
                                             <th>Paciente</th>
                                             <th>Resultado</th>
+                                            <th>Estado</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -221,6 +346,24 @@ const GeneralReport = () => {
                                                 <td>{item.medico_nombre_apellido}</td>
                                                 <td>{item.paciente_nombre_apellido}</td>
                                                 <td>{item.diagnostico_completo["Infeccion asociada a la enfermedad"]}</td>
+                                                <td>
+                                                    {item.diagnostico_aprobacion === null ? (
+                                                        <Row>
+                                                            <Col>
+                                                                <button className="btn btn-success" onClick={() => handleShowConfirmationModal(item, "approve")}>
+                                                                    <AiOutlineCheck />
+                                                                </button></Col>
+                                                            <Col>
+                                                                <button className="btn btn-danger" onClick={() => handleShowConfirmationModal(item, "disapprove")}>
+                                                                    <AiOutlineClose />
+                                                                </button></Col>
+                                                        </Row>
+                                                    ) : item.diagnostico_aprobacion === true ? (
+                                                        "Aprobado"
+                                                    ) : (
+                                                        "No Aprobado"
+                                                    )}
+                                                </td>
                                             </tr>
                                         ))}
 
@@ -294,7 +437,7 @@ const GeneralReport = () => {
                                             return contador + 1;
                                         }
                                         return contador;
-                                    }, 0)/infecciones.length)*100).toFixed(2)}% </strong>
+                                    }, 0) / infecciones.length) * 100).toFixed(2)}% </strong>
                                 </h2>
                             </Card.Body>
                         </Card>
@@ -319,7 +462,7 @@ const GeneralReport = () => {
                                             return contador + 1;
                                         }
                                         return contador;
-                                    }, 0)/infecciones.length)*100).toFixed(2)}% </strong>
+                                    }, 0) / infecciones.length) * 100).toFixed(2)}% </strong>
                                 </h2>
                             </Card.Body>
                         </Card>
@@ -334,13 +477,13 @@ const GeneralReport = () => {
                                         <h3> <strong className="purple"> Esquemas inmunosupresores </strong> diagnosticos </h3>
                                     </Card.Title>
                                     <div>
-                                        <BarChartEsquemaInmunosupresor data={diagnosticos} />
+                                        <BarChartEsquemaInmunosupresor data={approvedDiagnosticos} />
                                     </div>
                                 </Card.Body>
                             </Card>
                         </div>
                     </Col>
-                    
+
                     <Col md={5} xs={12}>
                         <Row>
                             <div className="d-flex justify-content-center mb-4">
@@ -350,7 +493,7 @@ const GeneralReport = () => {
                                             <h3 > <strong className="purple"> Etnia </strong> diagnosticos </h3>
                                         </Card.Title>
                                         <div>
-                                            <CircleChartEtnia data={diagnosticos} />
+                                            <CircleChartEtnia data={approvedDiagnosticos} />
                                         </div>
                                     </Card.Body>
                                 </Card>
@@ -364,7 +507,7 @@ const GeneralReport = () => {
                                             <h3 > <strong className="purple"> reumatologia </strong> diagnosticos </h3>
                                         </Card.Title>
                                         <div>
-                                            <CircleChartDx data={diagnosticos} />
+                                            <CircleChartDx data={approvedDiagnosticos} />
                                         </div>
                                     </Card.Body>
                                 </Card>
@@ -387,7 +530,7 @@ const GeneralReport = () => {
                                             <h3> <strong className="purple"> Comorbilidades </strong> diagnosticos </h3>
                                         </Card.Title>
                                         <div>
-                                            <BarChartComorbilidades data={diagnosticos} />
+                                            <BarChartComorbilidades data={approvedDiagnosticos} />
                                         </div>
                                     </Card.Body>
                                 </Card>
@@ -401,7 +544,7 @@ const GeneralReport = () => {
                                             <h3 > <strong className="purple"> Edad </strong> diagnosticos </h3>
                                         </Card.Title>
                                         <div style={{ height: '100%' }}> {/* Establece la altura del div interior al 100% */}
-                                            <BarChart data={diagnosticos} />
+                                            <BarChart data={approvedDiagnosticos} />
                                         </div>
                                     </Card.Body>
                                 </Card>
@@ -410,7 +553,7 @@ const GeneralReport = () => {
 
                     </Col>
 
-                    <Col md={6} xs={12} className= "d-flex align-items-stretch">
+                    <Col md={6} xs={12} className="d-flex align-items-stretch">
                         <div className="d-flex justify-content-center mb-4 h-100">
                             <Card style={{ width: '100%' }} >
                                 <Card.Body >
@@ -418,7 +561,7 @@ const GeneralReport = () => {
                                         <h3> <strong className="purple"> Tratamientos previos </strong> diagnosticos </h3>
                                     </Card.Title>
                                     <div >
-                                        <BarChartTratamientoPrevio data={diagnosticos} />
+                                        <BarChartTratamientoPrevio data={approvedDiagnosticos} />
                                     </div>
                                 </Card.Body>
                             </Card>
@@ -427,6 +570,27 @@ const GeneralReport = () => {
 
 
                 </Row>
+
+
+                <Modal show={showConfirmationModal} onHide={handleCloseConfirmationModal} centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Confirmación</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>¿Estás seguro de que desea <strong>{selectedAction === "approve" ? "APROBAR" : "NO APROBAR"}</strong> este diagnóstico? Esta accion es <strong> IRREVERSIBLE </strong></p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleCloseConfirmationModal}>
+                            Cancelar
+                        </Button>
+                        <Button
+                            variant={selectedAction === "approve" ? "success" : "danger"}
+                            onClick={handleConfirmAction}
+                        >
+                            Continuar
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
 
             </Container>
         </Container>
