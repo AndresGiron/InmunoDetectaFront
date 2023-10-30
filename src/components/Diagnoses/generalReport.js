@@ -264,7 +264,7 @@ const GeneralReport = () => {
                         <Card style={{ width: '100%' }}>
 
                             <Card.Body>
-                                <Card.Title><h3> <strong className="purple">Diagnosticos </strong></h3></Card.Title>
+                                <Card.Title><h3> <strong className="purple">Diagnósticos </strong></h3></Card.Title>
 
                                 <div className="d-flex justify-content-end mb-2"> {/* Agregamos un div con clase para alinear el botón a la izquierda */}
                                     <Button onClick={exportToExcel} variant="primary">
@@ -333,7 +333,7 @@ const GeneralReport = () => {
                                         </tr>
                                         <tr className="AdminTableTitle" style={{ backgroundColor: '#430054', color: '#eaf8ff' }}>
                                             <th>Fecha</th>
-                                            <th>Medico</th>
+                                            <th>Médico</th>
                                             <th>Paciente</th>
                                             <th>Resultado</th>
                                             <th>Estado</th>
@@ -373,7 +373,7 @@ const GeneralReport = () => {
                                 </Table>
                                 {tieneClaveEspecifica(diagnosticos, "Result") &&
                                     <div className="sinDiagnosticos">
-                                        <h1>No hay Diagnosticos asociados</h1>
+                                        <h1>No hay Diagnósticos asociados</h1>
                                     </div>
                                 }
 
@@ -408,7 +408,7 @@ const GeneralReport = () => {
                             <Card.Body style={{ backgroundColor: '#D9F070' }}>
                                 <div className="d-flex flex-column h-100"> {/* Agrega las clases d-flex y flex-column */}
                                     <p>
-                                        <strong> Diagnosticos Realizados </strong>
+                                        <strong> Diagnósticos Realizados </strong>
                                     </p>
                                     <h2>
                                         <strong>{infecciones.length}</strong>
@@ -421,11 +421,11 @@ const GeneralReport = () => {
                         <Card>
                             <Card.Body style={{ backgroundColor: '#F070D9' }}>
                                 <p>
-                                    <strong> Diagnosticos con Infeccion Asociada </strong>
+                                    <strong> Diagnósticos con Infección Asociada </strong>
                                 </p>
                                 <h2>
                                     <strong>{infecciones.reduce((contador, valor) => {
-                                        if (valor === "Infeccion asociada") {
+                                        if (valor === "Infección asociada") {
                                             return contador + 1;
                                         }
                                         return contador;
@@ -433,7 +433,7 @@ const GeneralReport = () => {
                                 </h2>
                                 <h2>
                                     <strong>{((infecciones.reduce((contador, valor) => {
-                                        if (valor === "Infeccion asociada") {
+                                        if (valor === "Infección asociada") {
                                             return contador + 1;
                                         }
                                         return contador;
@@ -446,11 +446,11 @@ const GeneralReport = () => {
                         <Card>
                             <Card.Body style={{ backgroundColor: '#F08770' }}>
                                 <p>
-                                    <strong> Diagnosticos con Infeccion NO Asociada </strong>
+                                    <strong> Diagnósticos con Infección NO Asociada </strong>
                                 </p>
                                 <h2>
                                     <strong>{infecciones.reduce((contador, valor) => {
-                                        if (valor === "Infeccion NO asociada") {
+                                        if (valor === "Infección NO asociada") {
                                             return contador + 1;
                                         }
                                         return contador;
@@ -458,7 +458,7 @@ const GeneralReport = () => {
                                 </h2>
                                 <h2>
                                     <strong>{((infecciones.reduce((contador, valor) => {
-                                        if (valor === "Infeccion NO asociada") {
+                                        if (valor === "Infección NO asociada") {
                                             return contador + 1;
                                         }
                                         return contador;
@@ -474,7 +474,7 @@ const GeneralReport = () => {
                             <Card style={{ width: '100%' }}>
                                 <Card.Body>
                                     <Card.Title>
-                                        <h3> <strong className="purple"> Esquemas inmunosupresores </strong> diagnosticos </h3>
+                                        <h3> <strong className="purple"> Esquemas inmunosupresores </strong> diagnósticos </h3>
                                     </Card.Title>
                                     <div>
                                         <BarChartEsquemaInmunosupresor data={approvedDiagnosticos} />
@@ -490,7 +490,7 @@ const GeneralReport = () => {
                                 <Card style={{ width: '100%' }}>
                                     <Card.Body>
                                         <Card.Title>
-                                            <h3 > <strong className="purple"> Etnia </strong> diagnosticos </h3>
+                                            <h3 > <strong className="purple"> Etnia </strong> diagnósticos </h3>
                                         </Card.Title>
                                         <div>
                                             <CircleChartEtnia data={approvedDiagnosticos} />
@@ -504,7 +504,7 @@ const GeneralReport = () => {
                                 <Card style={{ width: '100%' }}>
                                     <Card.Body>
                                         <Card.Title>
-                                            <h3 > <strong className="purple"> reumatologia </strong> diagnosticos </h3>
+                                            <h3 > <strong className="purple"> reumatologia </strong> diagnósticos </h3>
                                         </Card.Title>
                                         <div>
                                             <CircleChartDx data={approvedDiagnosticos} />
@@ -527,7 +527,7 @@ const GeneralReport = () => {
                                 <Card style={{ width: '100%' }}>
                                     <Card.Body>
                                         <Card.Title>
-                                            <h3> <strong className="purple"> Comorbilidades </strong> diagnosticos </h3>
+                                            <h3> <strong className="purple"> Comorbilidades </strong> diagnósticos </h3>
                                         </Card.Title>
                                         <div>
                                             <BarChartComorbilidades data={approvedDiagnosticos} />
@@ -541,7 +541,7 @@ const GeneralReport = () => {
                                 <Card style={{ width: '100%' }}>
                                     <Card.Body>
                                         <Card.Title>
-                                            <h3 > <strong className="purple"> Edad </strong> diagnosticos </h3>
+                                            <h3 > <strong className="purple"> Edad </strong> diagnósticos </h3>
                                         </Card.Title>
                                         <div style={{ height: '100%' }}> {/* Establece la altura del div interior al 100% */}
                                             <BarChart data={approvedDiagnosticos} />
@@ -558,7 +558,7 @@ const GeneralReport = () => {
                             <Card style={{ width: '100%' }} >
                                 <Card.Body >
                                     <Card.Title>
-                                        <h3> <strong className="purple"> Tratamientos previos </strong> diagnosticos </h3>
+                                        <h3> <strong className="purple"> Tratamientos previos </strong> diagnósticos </h3>
                                     </Card.Title>
                                     <div >
                                         <BarChartTratamientoPrevio data={approvedDiagnosticos} />

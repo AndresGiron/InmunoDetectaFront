@@ -95,12 +95,12 @@ const CircleChartEtnia = ({ data }) => {
     filteredData.forEach((item) => {
         const Etnia = item.Etnia;
 
-        if (item.Infeccion === "Infeccion asociada") {
+        if (item.Infeccion === "Infección asociada") {
             if (!countsAsociada[Etnia]) {
                 countsAsociada[Etnia] = 0;
             }
             countsAsociada[Etnia]++;
-        } else if (item.Infeccion === "Infeccion NO asociada") {
+        } else if (item.Infeccion === "Infección NO asociada") {
             if (!countsNoAsociada[Etnia]) {
                 countsNoAsociada[Etnia] = 0;
             }

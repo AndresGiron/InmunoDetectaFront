@@ -67,9 +67,9 @@ export const useExternalApi = () => {
         const data = await makeRequest({config})
         data.map((e)=>{
             if (e.diagnostico_completo["Infeccion asociada a la enfermedad"]===1){
-                e.diagnostico_completo["Infeccion asociada a la enfermedad"]="Infeccion NO asociada"
+                e.diagnostico_completo["Infeccion asociada a la enfermedad"]="Infección NO asociada"
             }else{
-                e.diagnostico_completo["Infeccion asociada a la enfermedad"]="Infeccion asociada"
+                e.diagnostico_completo["Infeccion asociada a la enfermedad"]="Infección asociada"
             }
             e.medico = e.nombre_medico +" "+ e.apellido_medico
             return 0

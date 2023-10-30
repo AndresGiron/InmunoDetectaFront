@@ -62,19 +62,19 @@ function NavBar() {
 
             <Nav.Item>
               <Nav.Link as={Link} to="/" onClick={() => updateExpanded(false)}>
-                <AiOutlineHome style={{ marginBottom: "2px" }} /> Inicio
+                <AiOutlineHome style={{ marginBottom: "2px" }} /> Início
               </Nav.Link>
             </Nav.Item>
 
             {(user === ""|| user.rol === "paciente") && <Nav.Item>
               <Nav.Link as={Link} to="/diagnosticoIA" onClick={() => updateExpanded(false)}>
-                <AiOutlineCalculator style={{ marginBottom: "2px" }} /> Diagnostico Usando IA
+                <AiOutlineCalculator style={{ marginBottom: "2px" }} /> Diagnóstico Usando IA
               </Nav.Link>
             </Nav.Item>}
 
             {user !== "" && user.rol === "medico"&& <Nav.Item>
               <Nav.Link as={Link} to="/diagnosticoIAMedico" onClick={() => updateExpanded(false)}>
-                <AiOutlineCalculator style={{ marginBottom: "2px" }} /> Diagnostico Usando IA
+                <AiOutlineCalculator style={{ marginBottom: "2px" }} /> Diagnóstico Usando IA
               </Nav.Link>
             </Nav.Item>}
 
@@ -85,7 +85,7 @@ function NavBar() {
                 to="/generalReport"
                 onClick={() => updateExpanded(false)}
               >
-                <TbReportMedical style={{ marginBottom: "2px" }} /> Diagnosticos
+                <TbReportMedical style={{ marginBottom: "2px" }} /> Diagnósticos
               </Nav.Link>
             </Nav.Item>
             } 
@@ -144,7 +144,7 @@ function NavBar() {
                 className="fork-btn-inner"
               >
                 <AiOutlineLogin style={{ fontSize: "1.2em" }} />{" "}
-                Iniciar Sesion </Button>
+                {"Iniciar Sesión"} </Button>
             </Nav.Item>}
 
             {user !== "" && <Nav.Item className="fork-btn">
@@ -155,7 +155,7 @@ function NavBar() {
                 className="fork-btn-inner"
               >
                 <RxExit style={{ fontSize: "1.2em" }} />{" "}
-                Cerrar Sesion </Button>
+                Cerrar Sesión </Button>
             </Nav.Item>}
 
           </Nav>

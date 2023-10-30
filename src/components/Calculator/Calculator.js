@@ -151,11 +151,11 @@ function Calculadora() {
     console.log(resultPredict)
     if (resultPredict === 1)
     {
-      setPopUpText("Infeccion NO asociada a enfermedad autoinmune")
+      setPopUpText("Infección NO asociada a enfermedad autoinmune")
 
     }else if (resultPredict === 0)
     {
-      setPopUpText("Infeccion asociada a enfermedad autoinmune")
+      setPopUpText("Infección asociada a enfermedad autoinmune")
     }
     
   },[resultPredict])
@@ -176,7 +176,7 @@ function Calculadora() {
   const ESCOLARIDAD = [
     { value: 0, name: 'Primaria' },
     { value: 1, name: 'Secundaria' },
-    { value: 2, name: 'Tecnica' },
+    { value: 2, name: 'Técnica' },
     { value: 3, name: 'Universitaria' },
     { value: "",name: 'sin dato'}
   ]
@@ -334,7 +334,7 @@ function Calculadora() {
                       </Form.Group>
 
                       <Form.Group as={Col} controlId="Genero">
-                        <Form.Label>Genero</Form.Label>
+                        <Form.Label>Género</Form.Label>
                         <Form.Select {...datos('Genero', { required: true })} >
                           {GENERO.map((e, key) => {
                             return <option key={e.value} value={e.value
@@ -385,14 +385,14 @@ function Calculadora() {
                 </Accordion.Item>
 
                 <Accordion.Item eventKey="2">
-                  <Accordion.Header>Diagnostico y Tratamientos</Accordion.Header>
+                  <Accordion.Header>Diagnóstico y Tratamientos</Accordion.Header>
                   <Accordion.Body>
 
                     <Row className="mb-3">
                       <Col></Col>
                       <Col md={11}>
                         <Form.Group as={Col} controlId="diagnostico reumatico">
-                          <Form.Label>Diagnostico reumatico</Form.Label>
+                          <Form.Label>Diagnóstico reumatico</Form.Label>
                           <Form.Select {...datos('Dx reumatologico final agrupado', { required: false })} >
                             {DIAGNOSTICO_REUMATICO.map((e, key) => {
                               return <option key={e.value} value={e.value
@@ -548,7 +548,7 @@ function Calculadora() {
                 </Accordion.Item>
 
                 <Accordion.Item eventKey="4">
-                  <Accordion.Header>Hallazgos segun Uroanalisis</Accordion.Header>
+                  <Accordion.Header>Hallazgos segun Uroanálisis</Accordion.Header>
                   <Accordion.Body>
 
                     <Row className="mb-3">
@@ -568,7 +568,7 @@ function Calculadora() {
                 </Accordion.Item>
 
                 <Accordion.Item eventKey="5">
-                  <Accordion.Header>Examenes y Analisis</Accordion.Header>
+                  <Accordion.Header>Exámenes y Análisis</Accordion.Header>
                   <Accordion.Body>
 
                   <Row className="mb-3">
@@ -608,7 +608,7 @@ function Calculadora() {
                 </Accordion.Item>
 
                 <Accordion.Item eventKey="6">
-                  <Accordion.Header>Titulos</Accordion.Header>
+                  <Accordion.Header>Títulos</Accordion.Header>
                   <Accordion.Body>
 
                     <Row className="mb-3">
@@ -768,7 +768,7 @@ function Calculadora() {
             </Form>
             <Row>
               <Card style={{ backgroundColor: 'transparent', border: 'none' }} >
-                <Col><Button onClick={registerSubmit(onSubmit)} style={{ zIndex: 1000 }}>Realizar Diagnostico</Button></Col>
+                <Col><Button onClick={registerSubmit(onSubmit)} style={{ zIndex: 1000 }}>Realizar Diagnóstico</Button></Col>
               </Card>
             </Row>
           </Col>
@@ -776,7 +776,7 @@ function Calculadora() {
 
         <Modal show={show} onHide={handleClose} centered>
           <Modal.Header closeButton>
-            <Modal.Title>Diagnostico</Modal.Title>
+            <Modal.Title>Diagnóstico</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {popUpText}

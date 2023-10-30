@@ -85,8 +85,8 @@ const BarChart = ({ data }) => {
 
 
 
-            const infeccionAsociadaCount = personasEnRango.filter((persona) => persona.Infeccion === "Infeccion asociada").length;
-            const infeccionNoAsociadaCount = personasEnRango.filter((persona) => persona.Infeccion === "Infeccion NO asociada").length;
+            const infeccionAsociadaCount = personasEnRango.filter((persona) => persona.Infeccion === "Infección asociada").length;
+            const infeccionNoAsociadaCount = personasEnRango.filter((persona) => persona.Infeccion === "Infección NO asociada").length;
 
             setInfeccionAsociada((prev) => prev + infeccionAsociadaCount);
             setInfeccionNoAsociada((prev) => prev + infeccionNoAsociadaCount);
@@ -127,8 +127,8 @@ const BarChart = ({ data }) => {
 
 
 
-            const infeccionAsociadaCount = personasEnRango.filter((persona) => persona.Infeccion === "Infeccion asociada").length;
-            const infeccionNoAsociadaCount = personasEnRango.filter((persona) => persona.Infeccion === "Infeccion NO asociada").length;
+            const infeccionAsociadaCount = personasEnRango.filter((persona) => persona.Infeccion === "Infección asociada").length;
+            const infeccionNoAsociadaCount = personasEnRango.filter((persona) => persona.Infeccion === "Infección NO asociada").length;
 
             setInfeccionAsociada((prev) => prev + infeccionAsociadaCount);
             setInfeccionNoAsociada((prev) => prev + infeccionNoAsociadaCount);

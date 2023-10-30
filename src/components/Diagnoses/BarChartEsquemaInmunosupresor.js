@@ -85,13 +85,13 @@ const BarChart = ({ data }) => {
     const tratamientos = ["Esteroide" ,"Antimalarico","Ciclofosfamida","Micofenolato","Tracolimus","Ciclosporina"]
     // Filtrar los datos para "Infección Asociada"
     const dataAsociada = tratamientos.map(tratamiento => {
-        const count = filteredData.filter(item => item.Infeccion === "Infeccion asociada" && item[tratamiento] === 0).length;
+        const count = filteredData.filter(item => item.Infeccion === "Infección asociada" && item[tratamiento] === 0).length;
         return count;
     });
 
     // Filtrar los datos para "Infección No Asociada"
     const dataNoAsociada = tratamientos.map(tratamiento => {
-        const count = filteredData.filter(item => item.Infeccion === "Infeccion NO asociada" && item[tratamiento] === 0).length;
+        const count = filteredData.filter(item => item.Infeccion === "Infección NO asociada" && item[tratamiento] === 0).length;
         return count;
     });
 

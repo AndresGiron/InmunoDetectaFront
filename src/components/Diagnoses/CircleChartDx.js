@@ -105,12 +105,12 @@ const CircleChartDx = ({ data }) => {
     filteredData.forEach((item) => {
         const Dx = item["Dx reumatologico final agrupado"];
 
-        if (item.Infeccion === "Infeccion asociada") {
+        if (item.Infeccion === "Infección asociada") {
             if (!countsAsociada[Dx]) {
                 countsAsociada[Dx] = 0;
             }
             countsAsociada[Dx]++;
-        } else if (item.Infeccion === "Infeccion NO asociada") {
+        } else if (item.Infeccion === "Infección NO asociada") {
             if (!countsNoAsociada[Dx]) {
                 countsNoAsociada[Dx] = 0;
             }

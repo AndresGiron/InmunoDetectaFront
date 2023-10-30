@@ -110,13 +110,13 @@ const BarChart = ({ data }) => {
 
     // Filtrar los datos para "Infección Asociada"
     const dataAsociada = enfermedades.map(enfermedad => {
-        const count = filteredData.filter(item => item.Infeccion === "Infeccion asociada" && item[enfermedad] === 0).length;
+        const count = filteredData.filter(item => item.Infeccion === "Infección asociada" && item[enfermedad] === 0).length;
         return count;
     });
 
     // Filtrar los datos para "Infección No Asociada"
     const dataNoAsociada = enfermedades.map(enfermedad => {
-        const count = filteredData.filter(item => item.Infeccion === "Infeccion NO asociada" && item[enfermedad] === 0).length;
+        const count = filteredData.filter(item => item.Infeccion === "Infección NO asociada" && item[enfermedad] === 0).length;
         return count;
     });
 

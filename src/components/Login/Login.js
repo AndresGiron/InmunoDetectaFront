@@ -61,15 +61,15 @@ function Login() {
             <Card className="shadow">
               <Card.Body>
                 <div className="mb-3 mt-md-4">
-                    <h1 className="login-heading">Iniciar <strong className="purple">Sesion </strong></h1>
+                    <h1 className="login-heading">Iniciar <strong className="purple">Sesión </strong></h1>
                     <p className=" mb-5">Por favor ingrese usuario y contraseña!</p>
                 <div className="mb-3">
                     <Form onSubmit={registerSubmit(onSubmit)}>
                       <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label className="text-center">
-                          Correo Electronico
+                          Correo Electrónico
                         </Form.Label>
-                        <Form.Control type="email" placeholder="Correo Electronico" 
+                        <Form.Control type="email" placeholder="Correo Electrónico" 
                         isInvalid={formErrors.correo}
                         {...datos("correo", { required: false })} />
                       </Form.Group>
@@ -96,14 +96,14 @@ function Login() {
                       </Form.Group>
                         <Button as = {Col} md={4} variant="primary" type="submit"
                         onClick={registerSubmit(onSubmit)}>
-                          Iniciar Sesion
+                          Iniciar Sesión
                         </Button>
                     </Form>
                     <div className="mt-3">
                       <p className="mb-0  text-center">
-                        ¿Aun no tienes una cuenta?{" "}
+                        Aún no tienes una cuenta?{" "}
                         <a href="#/register" className="text-primary fw-bold">
-                          Registrate
+                        Regístrate
                         </a>
                       </p>
                     </div>
