@@ -313,8 +313,8 @@ const GeneralReport = () => {
                                                     onChange={e => setFilterResultado(e.target.value)}
                                                 >
                                                     <option value="">Todos</option>
-                                                    <option value="Infeccion asociada">Infección Asociada</option>
-                                                    <option value="Infeccion NO asociada">Infección NO Asociada</option>
+                                                    <option value="Infección asociada">Infección Asociada</option>
+                                                    <option value="Infección NO asociada">Infección NO Asociada</option>
                                                 </Form.Control>
                                             </th>
                                             <th>

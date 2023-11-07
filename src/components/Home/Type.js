@@ -6,9 +6,9 @@ function Type() {
     <Typewriter
       options={{
         strings: [
-          "Apoyo Diagnostico",
+          "Apoyo Diagnóstico",
           "Impulsado por IA",
-          "Rapido",
+          "Rápido",
           "Preciso",
         ],
         autoStart: true,

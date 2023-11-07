@@ -142,7 +142,7 @@ const Report = () => {
                         <Card style={{ width: '100%' }}>
 
                             <Card.Body>
-                                <Card.Title><h1 className="login-heading">Mis <strong className="purple">Diagnosticos </strong></h1></Card.Title>
+                                <Card.Title><h1 className="login-heading">Mis <strong className="purple">Diagnósticos </strong></h1></Card.Title>
 
                                 <Table striped bordered hover>
                                     <thead>
@@ -182,8 +182,8 @@ const Report = () => {
                                                     onChange={e => setFilterResultado(e.target.value)}
                                                 >
                                                     <option value="">Todos</option>
-                                                    <option value="Infeccion asociada">Infección Asociada</option>
-                                                    <option value="Infeccion NO asociada">Infección NO Asociada</option>
+                                                    <option value="Infección asociada">Infección Asociada</option>
+                                                    <option value="Infección NO asociada">Infección NO Asociada</option>
                                                 </Form.Control>
                                             </th>
 
